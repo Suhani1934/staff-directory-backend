@@ -31,41 +31,60 @@ exports.register = async (req, res) => {
     });
 
     await newUser.save();
-    res.status(201).json({ message: "Registration successful" });
+    return res.status(201).json({ message: "Registration successful" });
   } catch (err) {
     console.error("Registration error:", err);
-    res.status(500).json({ message: "Server error" });
+    return res.status(500).json({ message: "Server error" });
   }
 };
 
 exports.login = async (req, res) => {
   try {
     const { email, password } = req.body;
+
+    // Find user by email
     const user = await User.findOne({ email });
-    
-    if (!user) return res.status(400).json({ message: "User not found" });
+    if (!user) {
+      return res.status(400).json({ message: "User not found" });
+    }
 
+    // Compare password
     const isMatch = await bcrypt.compare(password, user.password);
-    if (!isMatch) return res.status(400).json({ message: "Invalid password" });
+    if (!isMatch) {
+      return res.status(400).json({ message: "Invalid password" });
+    }
 
-    // If using JWT
-    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
-    res.json({ token, user });
+    // Generate JWT token
+    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
+      expiresIn: "1d",
+    });
 
-    res.json({ message: "Login successful", user });
+    return res.status(200).json({
+      message: "Login successful",
+      token,
+      user: {
+        id: user._id,
+        name: user.name,
+        email: user.email,
+        contact: user.contact,
+        department: user.department,
+        designation: user.designation,
+        photo: user.photo,
+        role: user.role,
+      },
+    });
   } catch (err) {
     console.error("Login error:", err);
-    res.status(500).json({ message: "Server error" });
+    return res.status(500).json({ message: "Server error" });
   }
 };
-
 
 exports.getAllStaff = async (req, res) => {
   try {
     const staff = await User.find({ role: "staff" });
-    res.status(200).json(staff);
+    return res.status(200).json(staff);
   } catch (err) {
     console.error("Error fetching staff:", err);
-    res.status(500).json({ message: "Server error" });
+    return res.status(500).json({ message: "Server error" });
   }
 };
