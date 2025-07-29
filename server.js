@@ -16,7 +16,7 @@ app.use("/uploads", express.static("uploads"));
 app.use("/api/users", userRoutes);
 
 app.get("/", (req, res) => {
-  res.send("API is running");
+  res.send("Staff Directory API is running");
 });
 
 const PORT = process.env.PORT || 5000;
