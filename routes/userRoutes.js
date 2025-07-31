@@ -6,6 +6,7 @@ import {
   getAllStaff,
   getProfile,
   updateProfile,
+  changePassword,
 } from "../controllers/authController.js";
 
 import { protect } from "../middlewares/authMiddleware.js";
@@ -19,5 +20,8 @@ router.get("/staff", getAllStaff);
 
 router.get("/profile", protect, getProfile);
 router.put("/profile", protect, upload.single("photo"), updateProfile);
+
+// change password
+router.put("/change-password", protect, changePassword);
 
 export default router;
