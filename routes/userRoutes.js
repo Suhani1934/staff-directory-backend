@@ -1,4 +1,3 @@
-// routes/userRoutes.js
 import express from "express";
 import {
   login,
@@ -16,7 +15,7 @@ const router = express.Router();
 
 router.post("/register", upload.single("photo"), register);
 router.post("/login", login);
-router.get("/staff", getAllStaff);
+router.get("/faculty", getAllStaff);
 
 router.get("/profile", protect, getProfile);
 router.put("/profile", protect, upload.single("photo"), updateProfile);

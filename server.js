@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import cors from "cors";
 import connectDB from "./config/db.js";
 import userRoutes from "./routes/userRoutes.js";
+import alumniRoutes from "./routes/alumniRoutes.js";
 
 dotenv.config();
 connectDB();
@@ -13,7 +14,11 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use("/uploads", express.static("uploads"));
 
+// for faculty
 app.use("/api/users", userRoutes);
+
+// for alumni
+app.use("/api/alumni", alumniRoutes);
 
 app.get("/", (req, res) => {
   res.send("Staff Directory API is running");
