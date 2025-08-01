@@ -13,8 +13,8 @@ import { upload } from "../utils/cloudinary.js";
 
 const router = express.Router();
 
-router.post("/register", upload.single("photo"), register);
-router.post("/login", login);
+router.post("/faculty/register", upload.single("photo"), register);
+router.post("/faculty/login", login);
 router.get("/faculty", getAllStaff);
 
 router.get("/profile", protect, getProfile);
