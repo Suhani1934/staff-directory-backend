@@ -17,7 +17,17 @@ export const registerAlumni = async (req, res) => {
 
     const photo = req.file?.path;
 
-    if (!name || !email || !mobile || !designation || !organization || !location || !passedOutYear || !password || !photo) {
+    if (
+      !name ||
+      !email ||
+      !mobile ||
+      !designation ||
+      !organization ||
+      !location ||
+      !passedOutYear ||
+      !password ||
+      !photo
+    ) {
       return res.status(400).json({ message: "All fields are required" });
     }
 
@@ -82,7 +92,7 @@ export const loginAlumni = async (req, res) => {
       },
     });
   } catch (err) {
-    console.error("Login error:", err);
+    console.error("Alumni Login error:", err);
     return res.status(500).json({ message: "Server error" });
   }
 };
@@ -92,7 +102,7 @@ export const getAllAlumniCount = async (req, res) => {
     const total = await Alumni.countDocuments();
     res.json({ total });
   } catch (error) {
-    res.status(500).json({ message: 'Error getting alumni count' });
+    res.status(500).json({ message: "Error getting alumni count" });
   }
 };
 export const getAllAlumni = async (req, res) => {

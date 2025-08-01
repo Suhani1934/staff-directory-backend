@@ -4,6 +4,7 @@ import cors from "cors";
 import connectDB from "./config/db.js";
 import userRoutes from "./routes/userRoutes.js";
 import alumniRoutes from "./routes/alumniRoutes.js";
+import studentRoutes from './routes/studentRoutes.js';
 
 dotenv.config();
 connectDB();
@@ -19,6 +20,7 @@ app.use("/api/users", userRoutes);
 
 // for alumni
 app.use("/api/alumni", alumniRoutes);
+app.use('/api/students', studentRoutes);
 
 app.get("/", (req, res) => {
   res.send("Staff Directory API is running");
