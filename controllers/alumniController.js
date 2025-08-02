@@ -116,13 +116,13 @@ export const getAllAlumni = async (req, res) => {
 
 export const getAlumniProfile = async (req, res) => {
   try {
-    const alumni = await Alumni.findById(req.user._id).select("-password");
-    if (alumni) {
-      res.json(alumni);
-    } else {
-      res.status(404).json({ message: "Alumni not found" });
+    const alumni = await Alumni.findById(req.params.id).select('-password'); 
+    if (!alumni) {
+      return res.status(404).json({ message: 'Alumni not found' });
     }
-  } catch (err) {
-    res.status(500).json({ message: "Error fetching profile" });
+    res.status(200).json(alumni);
+  } catch (error) {
+    console.error('Error fetching alumni profile:', error);
+    res.status(500).json({ message: 'Server error' });
   }
 };
