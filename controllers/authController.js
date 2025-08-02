@@ -71,7 +71,7 @@ export const login = async (req, res) => {
 
 export const getAllStaff = async (req, res) => {
   try {
-    const staff = await User.find({ role: "staff" });
+    const staff = await User.find({ role: "faculty" });
     return res.status(200).json(staff);
   } catch (err) {
     console.error("Error fetching staff:", err);

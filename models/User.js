@@ -7,7 +7,7 @@ const userSchema = new mongoose.Schema({
   password: { type: String, required: true },
   department: { type: String, required: true },
   designation: {type: String, required:true},
-  role: { type: String, default: "staff" },
+  role: { type: String, default: "faculty" },
   photo: { type: String },
 }, { timestamps: true });
 

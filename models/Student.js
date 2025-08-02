@@ -13,6 +13,7 @@ const studentSchema = new mongoose.Schema(
     address: { type: String, required: true },
     photo: { type: String, required: true },
     password: { type: String, required: true },
+    role: { type: String, default: "student" },
   },
   { timestamps: true }
 );
